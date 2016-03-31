@@ -77,7 +77,7 @@ class MRFRegularizer(Regularizer):
         batch_size = K.shape(output)[0] // 2
         patch_size = self.patch_size
         patch_stride = 1
-        generated = output[batch_size:, :, :, :]
+        generated = output[:batch_size, :, :, :]
         # extract patches from feature maps
         generated_patches, generated_patches_norm = \
             patches.make_patches(generated, patch_size, patch_stride)
