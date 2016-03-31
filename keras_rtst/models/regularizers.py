@@ -91,3 +91,42 @@ class MRFRegularizer(Regularizer):
             target_patches[patch_ids], K.shape(generated_patches))
         loss += self.weight * K.sum(K.square(best_target_patches - generated_patches)) / patch_size ** 2
         return loss
+
+
+class AnalogyRegularizer(Regularizer):
+    '''Image analogy regularizer'''
+    def __init__(self, features_a, features_ap, weight=1.0, patch_size=3, full_analogy=False, **kwargs):
+        self.features_a = features_a
+        self.features_ap = features_ap
+        self.weight = weight
+        self.patch_size = patch_size
+        self.full_analogy = full_analogy
+        super(AnalogyRegularizer, self).__init__(**kwargs)
+
+    def __call__(self, loss):
+        from . import patches
+
+        output = self.layer.get_output(True)
+        assert K.ndim(output) == 4
+        batch_size = K.shape(output)[0] // 2
+        patch_size = self.patch_size
+        patch_stride = 1
+        generated = output[:batch_size, :, :, :]
+        content = output[batch_size:, :, :, :]
+        # extract patches from feature maps
+        generated_patches, generated_patches_norm = \
+            patches.make_patches(generated, patch_size, patch_stride)
+        content_patches, content_patches_norm = \
+            patches.make_patches(content, patch_size, patch_stride)
+        a_patches, a_patches_norm = \
+            patches.make_patches(K.variable(self.features_a), patch_size, patch_stride)
+        ap_patches, ap_patches_norm = \
+            patches.make_patches(K.variable(self.features_ap), patch_size, patch_stride)
+        # find best patches and calculate loss
+        patch_ids = patches.find_patch_matches(
+            content_patches, content_patches_norm,
+            a_patches / a_patches_norm)
+        best_analogy_patches = K.reshape(
+            ap_patches[patch_ids], K.shape(generated_patches))
+        loss += self.weight * K.sum(K.square(best_analogy_patches - generated_patches)) / patch_size ** 2
+        return loss

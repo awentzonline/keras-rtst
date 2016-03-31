@@ -17,6 +17,8 @@ def get_args():
                         help='Prefix for output')
     parser.add_argument('--style-img', dest='style_image_path', type=str,
                         help='Path to the style image.')
+    parser.add_argument('--style-map-img', dest='style_map_image_path', type=str,
+                        default=None, help='Path to the style map image for analogy loss (A)')
     parser.add_argument('--max-width', dest='max_width', type=int,
                         default=256, help='Max width')
     parser.add_argument('--max-height', dest='max_height', type=int,
@@ -48,7 +50,7 @@ def get_args():
                         default=['conv2_2'],
                         help='Comma-separated list of layer names to be used for the content loss')
     parser.add_argument('--style-w', dest='style_weight', type=float,
-                        default=10.0, help='Style loss weight')
+                        default=1.0, help='Style loss weight')
     parser.add_argument('--style-layers', dest='style_layers', action=CommaSplitAction,
                         default=['conv1_2', 'conv2_2', 'conv3_3', 'conv4_3'],
                         help='Comma-separated list of layer names to be used for the content loss')
@@ -57,6 +59,11 @@ def get_args():
     parser.add_argument('--mrf-layers', dest='mrf_layers', action=CommaSplitAction,
                         default=['conv4_2'],
                         help='Comma-separated list of layer names to be used for the MRF loss')
+    parser.add_argument('--analogy-w', dest='analogy_weight', type=float,
+                        default=1.0, help='Image analogy loss weight')
+    parser.add_argument('--analogy-layers', dest='analogy_layers', action=CommaSplitAction,
+                        default=['conv4_1'],
+                        help='Comma-separated list of layer names to be used for the analogy loss')
     parser.add_argument('--tv-w', dest='tv_weight', type=float,
                         default=0.00001, help='Texture total variation loss (smoothness).')
     # vgg
