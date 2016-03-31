@@ -13,7 +13,8 @@ Install
 Usage
 -----
 After installation you'll find `train-rtst.sh`, `render-rtst.sh` and `rtst.py` on your path.
-The shell scripts are just wrappers around `rtst.py` to demonstrate usage and maybe be a little convenient.
+The shell scripts are just wrappers around `rtst.py` to demonstrate usage and maybe be a little convenient. There's also a script `rtst-download-training-images.sh` that
+will download a small batch of images randomly selected from a subset of ImageNet 2012.
 
 Examples
 --------

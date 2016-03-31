@@ -3,11 +3,11 @@
 # Uses `convert` tool from ImageMagick http://www.imagemagick.org/script/binary-releases.php
 GIF=$1
 WEIGHTS_PREFIX=$2
-PREFIX=$3
+OUTPUT_PREFIX=$3
 VGG_WEIGHTS=${4-vgg16_weights.h5}
-MAX_WIDTH=512
-FRAMES_PATH=$PREFIX/frames
-PROCESSED_PATH=$PREFIX/processed
+MAX_WIDTH=${MAX_WIDTH-512}
+FRAMES_PATH=$OUTPUT_PREFIX/frames
+PROCESSED_PATH=$OUTPUT_PREFIX/processed
 DELAY=5
 CONVERT_GLOB="$FRAMES_PATH/*.png"
 
