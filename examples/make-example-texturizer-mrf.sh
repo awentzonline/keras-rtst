@@ -13,12 +13,14 @@ rtst.py \
   --style-img=$STYLE_PATH \
   --train \
   --max-width=${MAX_WIDTH-128} \
-  --content-w=${CONTENT_W-0.001} \
-  --content-layers=${CONTENT_LAYERS-conv2_2} \
+  --content-w=${CONTENT_W-0.5} \
+  --content-layers=${CONTENT_LAYERS-conv4_2} \
   --style-w=${STYLE_W-0.0} \
   --mrf-w=${MRF_W-1.0} \
+  --mrf-layers=${MRF_LAYERS-conv4_2} \
   --weights-prefix=$WEIGHTS_PREFIX \
   --vgg-weights=$VGG_WEIGHTS \
   --train-data=$TRAINING_DATA \
   --eval-data=$EVAL_DATA \
+  --batch-size=1 \
   --ignore --auto-save-weights

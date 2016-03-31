@@ -18,28 +18,6 @@ def make_patches(x, patch_size, patch_stride):
     return patches, patches_norm
 
 
-def reconstruct_from_patches_2d(patches, image_size):
-    '''This is from scikit-learn. I thought it was a little overkill
-    to require it just for this function.
-    '''
-    i_h, i_w = image_size[:2]
-    p_h, p_w = patches.shape[1:3]
-    img = np.zeros(image_size)
-    # compute the dimensions of the patches array
-    n_h = i_h - p_h + 1
-    n_w = i_w - p_w + 1
-    for p, (i, j) in zip(patches, product(range(n_h), range(n_w))):
-        img[i:i + p_h, j:j + p_w] += p
-
-    for i in range(i_h):
-        for j in range(i_w):
-            # divide by the amount of overlap
-            # XXX: is this the most efficient way? memory-wise yes, cpu wise?
-            img[i, j] /= float(min(i + 1, p_h, i_h - i) *
-                               min(j + 1, p_w, i_w - j))
-    return img
-
-
 def combine_patches(patches, out_shape):
     '''Reconstruct an image from these `patches`'''
     patches = patches.transpose(0, 2, 3, 1)
