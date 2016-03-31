@@ -1,0 +1,31 @@
+Example image attributions
+==========================
+
+bricks0.jpg
+ * Author: Pawel Wozniak
+ * License: Creative Commons Attribution-Share Alike 3.0 Unported
+ * https://freestocktextures.com/texture/brick-medieval-old,690.html
+
+rocks0.jpg
+ * Author: Maliz Ong
+ * License: Public Domain
+ * http://www.publicdomainpictures.net/view-image.php?image=84131&picture=rocks-background
+
+starrynight.jpg
+ * Author: Vincent van Gogh
+ * License: Public Domain
+ * https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg
+
+soup0.jpg, radishes0.jpg
+ * Source: Simoncelli
+ * License: ?
+ * http://www.cns.nyu.edu/lcv/texture/
+
+sugarskull0.jpg
+ * Author: GDJ https://openclipart.org/user-detail/GDJ
+ * License: Public Domain
+ * https://openclipart.org/detail/221795/floral-skull
+
+flag0.jpg
+ * Lindsay Shaver https://www.flickr.com/photos/33291250@N06
+ * License: Creative Commons Attribution 2.0

@@ -1,0 +1,15 @@
+*.DS_Store
+*.pyc
+*.swp
+*.egg-info
+build/
+examples/out/*
+tinytraining/content/*
+tinytraining/style/*
+*.weights
+!examples/README.md
+vgg16_weights.h5
+venv
+MANIFEST
+dist/
+out/*
