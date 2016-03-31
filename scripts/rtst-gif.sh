@@ -26,4 +26,4 @@ rtst.py \
   --max-width=$MAX_WIDTH
 
 echo "Combining new frames..."
-convert -delay $DELAY -loop 0 $PROCESSED_PATH/*.png $PREFIX/result.gif
+convert -delay $DELAY -loop 0 $PROCESSED_PATH/*.png $OUTPUT_PREFIX/result.gif
