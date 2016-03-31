@@ -27,3 +27,5 @@ Differences from the paper
  * This code doesn't use strided convolutions for upsampling as it doesn't seem to be implemented in Keras/Theano.
  * The learning rate starts at 0.1 and decays at a rate of 0.9 every 200 iterations until it reaches 0.001.
  * Also similarly to "Texture Networks" I'm using a really small training set.
+ * I've added `MRFRegularizer` and `AnalogyRegularizer` which add losses for patch-wise
+ markov random fields and image analogies.
