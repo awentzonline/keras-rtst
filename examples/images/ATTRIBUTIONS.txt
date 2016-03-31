@@ -11,6 +11,11 @@ rocks0.jpg
  * License: Public Domain
  * http://www.publicdomainpictures.net/view-image.php?image=84131&picture=rocks-background
 
+stainedglass0.jpg
+ * Author: Daderot https://commons.wikimedia.org/wiki/User:Daderot
+ * License: Public Domain
+ * https://commons.wikimedia.org/wiki/File:Medieval_stained_glass,_Worcester_Art_Museum_-_IMG_7501.JPG
+
 starrynight.jpg
  * Author: Vincent van Gogh
  * License: Public Domain
