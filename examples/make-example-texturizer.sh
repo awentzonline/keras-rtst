@@ -13,7 +13,7 @@ rtst.py \
   --style-img=$STYLE_PATH \
   --train \
   --max-width=${MAX_WIDTH-256} \
-  --content-w=${CONTENT_W-1} \
+  --content-w=${CONTENT_W-0.01} \
   --content-layers=${CONTENT_LAYERS-conv2_2} \
   --style-w=${STYLE_W-10.0} \
   --weights-prefix=$WEIGHTS_PREFIX \

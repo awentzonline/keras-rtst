@@ -13,15 +13,14 @@ def gram_matrix(x):
 
 class FeatureStyleRegularizer(Regularizer):
     '''Gatys et al 2015 http://arxiv.org/pdf/1508.06576.pdf'''
-    def __init__(self, target=None, weight=1.0, num_inputs=1, **kwargs):
+    def __init__(self, target=None, weight=1.0, **kwargs):
         self.target = target
         self.weight = weight
-        self.num_inputs = num_inputs
         super(FeatureStyleRegularizer, self).__init__(**kwargs)
 
     def __call__(self, loss):
         output = self.layer.get_output(True)
-        batch_size = K.shape(output)[0] // self.num_inputs
+        batch_size = K.shape(output)[0] // 2
         generated = output[:batch_size, :, :, :]
         loss += self.weight * K.mean(
             K.sum(K.square(gram_matrix(self.target) - gram_matrix(generated)), axis=(1,2))
@@ -31,7 +30,7 @@ class FeatureStyleRegularizer(Regularizer):
 
 class FeatureContentRegularizer(Regularizer):
     '''Penalizes euclidean distance of content features.'''
-    def __init__(self, weight=0.001, **kwargs):
+    def __init__(self, weight=1.0, **kwargs):
         self.weight = weight
         super(FeatureContentRegularizer, self).__init__(**kwargs)
 

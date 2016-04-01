@@ -49,20 +49,23 @@ def make_model(args, style_img=None, activation='relu', pool_class=AveragePoolin
             for layer_name in args.style_layers:
                 layer = model.nodes[layer_name]
                 style_regularizer = FeatureStyleRegularizer(
-                    target=style_features[layer_name], weight=args.style_weight,
-                    num_inputs=2)
+                    target=style_features[layer_name],
+                    weight=args.style_weight / len(args.style_layers))
                 style_regularizer.set_layer(layer)
                 regularizers.append(style_regularizer)
         if args.content_weight != 0.0:
             for layer_name in args.content_layers:
                 layer = model.nodes[layer_name]
-                content_regularizer = FeatureContentRegularizer(weight=args.content_weight)
+                content_regularizer = FeatureContentRegularizer(
+                    weight=args.content_weight / len(args.content_layers))
                 content_regularizer.set_layer(layer)
                 regularizers.append(content_regularizer)
         if args.mrf_weight != 0.0:
             for layer_name in args.mrf_layers:
                 layer = model.nodes[layer_name]
-                mrf_regularizer = MRFRegularizer(K.variable(style_features[layer_name]), weight=args.mrf_weight)
+                mrf_regularizer = MRFRegularizer(
+                    K.variable(style_features[layer_name]),
+                    weight=args.mrf_weight / len(args.mrf_layers))
                 mrf_regularizer.set_layer(layer)
                 regularizers.append(mrf_regularizer)
         if args.analogy_weight != 0.0:
@@ -73,7 +76,7 @@ def make_model(args, style_img=None, activation='relu', pool_class=AveragePoolin
                 analogy_regularizer = AnalogyRegularizer(
                     style_map_features[layer_name],
                     style_features[layer_name],
-                    weight=args.analogy_weight)
+                    weight=args.analogy_weight / len(args.analogy_layers))
                 analogy_regularizer.set_layer(layer)
                 regularizers.append(analogy_regularizer)
         if args.tv_weight != 0.0:
