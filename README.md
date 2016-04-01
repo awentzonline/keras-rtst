@@ -28,4 +28,6 @@ Differences from the paper
  * The learning rate starts at 0.1 and decays at a rate of 0.9 every 200 iterations until it reaches 0.001.
  * Also similarly to "Texture Networks" I'm using a really small training set.
  * I've added `MRFRegularizer` and `AnalogyRegularizer` which add losses for patch-wise
- markov random fields and image analogies.
+ markov random fields and image analogies. Use `--style-map-path=/your/image.jpg`
+ to specify "image A" in image analogy parlance (`--style-path` corresponds to
+ "Image A prime")

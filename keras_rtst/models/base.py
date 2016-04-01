@@ -10,7 +10,7 @@ from keras.layers.advanced_activations import LeakyReLU
 from keras.layers.core import Activation, Layer
 from keras.layers.convolutional import AveragePooling2D, Convolution2D, MaxPooling2D, UpSampling2D, ZeroPadding2D
 from keras.layers.normalization import BatchNormalization
-from keras.models import Graph
+from keras.models import Graph, Sequential
 
 
 def add_conv_block(net, name, input_name, filters, filter_size, activation='relu', subsample=(1, 1)):
@@ -40,6 +40,35 @@ def create_res_texture_net(input_rows, input_cols, num_res_filters=128, res_out_
     add_conv_block(net, 'out_1', 'out_up1', num_res_filters // 4, 3)
     add_conv_block(net, 'out_2', 'out_1', 3, 9, activation='linear')
     net.add_node(Activation('linear'), 'texture_rgb', 'out_2', create_output=True)
+    return net
+
+
+def add_seq_conv_block(net, filters, filter_size, activation='relu', subsample=(1, 1), input_shape=None):
+    if input_shape:
+        kwargs = dict(input_shape=input_shape)
+    else:
+        kwargs = dict()
+    net.add(Convolution2D(
+        filters, filter_size, filter_size, subsample=subsample, border_mode='same', **kwargs))
+    net.add(BatchNormalization(mode=0, axis=1))
+    net.add(Activation(activation))
+
+
+def create_sequential_texture_net(input_rows, input_cols, num_res_filters=128,
+        res_out_activation='linear', num_inner_blocks=5):
+    net = Sequential()
+    add_seq_conv_block(net, num_res_filters // 4, 9, input_shape=(3, input_rows, input_cols))
+    add_seq_conv_block(net, num_res_filters // 2, 3, subsample=(2, 2))
+    add_seq_conv_block(net, num_res_filters, 3, subsample=(2, 2))
+    for i in range(num_inner_blocks):
+        add_seq_conv_block(net, num_res_filters, 3)
+        add_seq_conv_block(net, num_res_filters, 3)
+    # theano doesn't seem to support fractionally-strided convolutions at the moment
+    net.add(UpSampling2D())
+    add_seq_conv_block(net, num_res_filters // 2, 3)
+    net.add(UpSampling2D())
+    add_seq_conv_block(net, num_res_filters // 4, 3)
+    add_seq_conv_block(net, 3, 9, activation='linear')
     return net
 
 

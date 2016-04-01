@@ -9,7 +9,7 @@ from keras.layers.convolutional import AveragePooling2D
 from keras.models import Graph
 from keras.optimizers import Adam
 
-from .base import create_res_texture_net, dumb_objective
+from .base import create_res_texture_net, create_sequential_texture_net, dumb_objective
 from .regularizers import (
     AnalogyRegularizer, FeatureContentRegularizer, FeatureStyleRegularizer,
     MRFRegularizer, TVRegularizer)
@@ -18,7 +18,10 @@ from .regularizers import (
 def make_model(args, style_img=None, activation='relu', pool_class=AveragePooling2D):
     model = Graph()
     model.add_input('content', batch_input_shape=(args.batch_size, 3, args.max_height, args.max_width))
-    texnet = create_res_texture_net(args.max_height, args.max_width)
+    if args.sequential_model:
+        texnet = create_sequential_texture_net(args.max_height, args.max_width)
+    else:
+        texnet = create_res_texture_net(args.max_height, args.max_width)
     # add the texture net to the model
     model.add_node(texnet, 'texnet', 'content')
     model.add_output('texture_rgb', 'texnet')

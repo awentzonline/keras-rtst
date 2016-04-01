@@ -43,6 +43,8 @@ def get_args():
                         default='./training-images/', help='Path to evaluation images.')
     parser.add_argument('--contrast', dest='contrast_percent', type=float,
                         default=0.0, help='Stretch contrast percentile.')
+    parser.add_argument('--sequential-model', dest='sequential_model', action='store_true',
+                        help='Use a sequential rather than residual/graph model.')
     # losses
     parser.add_argument('--content-w', dest='content_weight', type=float,
                         default=1.0, help='Content loss weight')
@@ -60,7 +62,7 @@ def get_args():
                         default=['conv4_2'],
                         help='Comma-separated list of layer names to be used for the MRF loss')
     parser.add_argument('--analogy-w', dest='analogy_weight', type=float,
-                        default=1.0, help='Image analogy loss weight')
+                        default=0.0, help='Image analogy loss weight')
     parser.add_argument('--analogy-layers', dest='analogy_layers', action=CommaSplitAction,
                         default=['conv4_1'],
                         help='Comma-separated list of layer names to be used for the analogy loss')
