@@ -4,6 +4,7 @@
 *.egg-info
 build/
 examples/out/*
+examples/*.json
 tinytraining/content/*
 tinytraining/style/*
 *.weights

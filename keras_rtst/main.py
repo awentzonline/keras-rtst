@@ -33,6 +33,7 @@ def train_main(args):
     model = model(args, style_img=style_img)
     print('loading weights...')
     weights_filename = args.weights_prefix + '.weights'
+    model_filename = args.weights_prefix + '.json'
     if not args.ignore_weights and os.path.exists(weights_filename):
         model.nodes['texnet'].load_weights(weights_filename)
 
@@ -48,6 +49,9 @@ def train_main(args):
     if args.auto_save_weights:
         save_kwargs['overwrite'] = True
     model.nodes['texnet'].save_weights(weights_filename, **save_kwargs)
+    model_json = model.nodes['texnet'].to_json()
+    with open(model_filename, 'w') as model_file:
+        model_file.write(model_json)
     # output final samples
     output_samples(model, args, eval_generator)
 
