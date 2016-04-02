@@ -13,7 +13,7 @@ setup(
     install_requires=[
         'Cython>=0.23.4',
         'h5py>=2.5.0',
-        'Keras>=0.3.2',
+        'Keras>=0.3.3',
         'numpy>=1.10.4',
         'Pillow>=3.1.1',
         'PyYAML>=3.11',
@@ -25,7 +25,6 @@ setup(
     ],
     dependency_links=[
         'https://github.com/Theano/Theano.git@954c3816a40de172c28124017a25387f3bf551b2#egg=Theano',
-        'https://github.com/fchollet/keras.git@90aafca585ca92d7ff558d811ff8eb8d60d7c3d4#egg=keras',
     ],
     scripts=[
         'scripts/rtst.py',
