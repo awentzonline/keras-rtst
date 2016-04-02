@@ -47,12 +47,12 @@ def get_args():
                         help='Use a sequential rather than residual/graph model.')
     # losses
     parser.add_argument('--content-w', dest='content_weight', type=float,
-                        default=1.0, help='Content loss weight')
+                        default=0.01, help='Content loss weight')
     parser.add_argument('--content-layers', dest='content_layers', action=CommaSplitAction,
                         default=['conv2_2'],
                         help='Comma-separated list of layer names to be used for the content loss')
     parser.add_argument('--style-w', dest='style_weight', type=float,
-                        default=1.0, help='Style loss weight')
+                        default=10.0, help='Style loss weight')
     parser.add_argument('--style-layers', dest='style_layers', action=CommaSplitAction,
                         default=['conv1_2', 'conv2_2', 'conv3_3', 'conv4_3'],
                         help='Comma-separated list of layer names to be used for the content loss')
