@@ -45,6 +45,8 @@ def get_args():
                         default=0.0, help='Stretch contrast percentile.')
     parser.add_argument('--sequential-model', dest='sequential_model', action='store_true',
                         help='Use a sequential rather than residual/graph model.')
+    parser.add_argument('--activation', type=str, default='LeakyReLU',
+                        help='Activation function to use.')
     # losses
     parser.add_argument('--content-w', dest='content_weight', type=float,
                         default=0.01, help='Content loss weight')

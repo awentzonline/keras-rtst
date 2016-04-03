@@ -3,7 +3,9 @@ import time
 
 import keras_vgg_buddy
 import numpy as np
+from keras import activations
 from keras import backend as K
+from keras.layers import advanced_activations
 from keras.layers.core import Layer
 from keras.layers.convolutional import AveragePooling2D
 from keras.models import Graph
@@ -15,13 +17,18 @@ from .regularizers import (
     MRFRegularizer, TVRegularizer)
 
 
-def make_model(args, style_img=None, activation='relu', pool_class=AveragePooling2D):
+def make_model(args, style_img=None):
     model = Graph()
     model.add_input('content', batch_input_shape=(args.batch_size, 3, args.max_height, args.max_width))
+    try:  # if it's a standard activation then just keep the string
+        activations.get(args.activation)
+        activation = args.activation
+    except:  # otherwise we need to look up the class in advanced activations (e.g. LeakyReLU)
+        activation = getattr(advanced_activations, args.activation, 'activation function')
     if args.sequential_model:
-        texnet = create_sequential_texture_net(args.max_height, args.max_width)
+        texnet = create_sequential_texture_net(args.max_height, args.max_width, activation=activation)
     else:
-        texnet = create_res_texture_net(args.max_height, args.max_width)
+        texnet = create_res_texture_net(args.max_height, args.max_width, activation=activation)
     # add the texture net to the model
     model.add_node(texnet, 'texnet', 'content')
     model.add_output('texture_rgb', 'texnet')
