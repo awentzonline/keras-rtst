@@ -31,3 +31,7 @@ Differences from the paper
  markov random fields and image analogies. Use `--style-map-path=/your/image.jpg`
  to specify "image A" in image analogy parlance (`--style-path` corresponds to
  "Image A prime")
+ * `--model=girthy` adds a series of residual blocks at each depth instead of just
+ the bottom-most scale. Set maximum depth with `--depth` and the peak number of
+ convolution filters with `--num-res-filters`. The number of filters is halved
+ at each larger scale.

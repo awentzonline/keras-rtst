@@ -6,6 +6,11 @@ MODEL_CONFIG = {
         'input_generator': 'keras_rtst.generators.style_xfer',
         'evaluation_input_generator': 'keras_rtst.generators.style_xfer',
         'make_model': 'keras_rtst.models.style_xfer'
+    },
+    'girthy': {
+        'input_generator': 'keras_rtst.generators.style_xfer',
+        'evaluation_input_generator': 'keras_rtst.generators.style_xfer',
+        'make_model': 'keras_rtst.models.style_xfer_girthy'
     }
 }
 

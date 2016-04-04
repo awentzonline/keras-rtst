@@ -20,4 +20,5 @@ rtst.py \
   --vgg-weights=$VGG_WEIGHTS \
   --train-data=$TRAINING_DATA \
   --eval-data=$EVAL_DATA \
+  --model=girthy --depth=3 --num-res-filters=64 \
   --ignore --auto-save-weights
