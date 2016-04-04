@@ -4,7 +4,7 @@ from setuptools import find_packages
 
 setup(
     name='keras-rtst',
-    version='0.0.6',
+    version='0.0.7',
     description='An implementation of real-time style transfer in Keras',
     author='Adam Wentz',
     author_email='adam@adamwentz.com',
