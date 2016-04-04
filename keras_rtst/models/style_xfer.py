@@ -26,9 +26,11 @@ def make_model(args, style_img=None):
     except:  # otherwise we need to look up the class in advanced activations (e.g. LeakyReLU)
         activation = getattr(advanced_activations, args.activation, 'activation function')
     if args.sequential_model:
-        texnet = create_sequential_texture_net(args.max_height, args.max_width, activation=activation)
+        texnet = create_sequential_texture_net(args.max_height, args.max_width,
+            activation=activation, num_res_filters=args.num_res_filters)
     else:
-        texnet = create_res_texture_net(args.max_height, args.max_width, activation=activation)
+        texnet = create_res_texture_net(args.max_height, args.max_width,
+        activation=activation, num_res_filters=args.num_res_filters)
     # add the texture net to the model
     model.add_node(texnet, 'texnet', 'content')
     model.add_output('texture_rgb', 'texnet')

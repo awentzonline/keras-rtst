@@ -47,6 +47,8 @@ def get_args():
                         help='Use a sequential rather than residual/graph model.')
     parser.add_argument('--activation', type=str, default='LeakyReLU',
                         help='Activation function to use.')
+    parser.add_argument('--num-res-filters', type=int, default=128,
+                        help='Number of filters on the convolutional layers in the residual blocks')
     # losses
     parser.add_argument('--content-w', dest='content_weight', type=float,
                         default=0.01, help='Content loss weight')
