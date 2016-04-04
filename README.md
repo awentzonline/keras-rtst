@@ -1,5 +1,8 @@
 Real-Time Style Transfer with Keras
 ===================================
+
+![Brick nuke gif](https://raw.githubusercontent.com/awentzonline/keras-rtst/master/examples/images/nuke-bricks.gif)
+
 This is an attempt at implementing something like [Real-Time Style Transfer](http://arxiv.org/pdf/1603.08155v1.pdf)
 with the [Keras](http://keras.io/) framework.
 
