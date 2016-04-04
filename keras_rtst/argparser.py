@@ -49,6 +49,8 @@ def get_args():
                         help='Activation function to use.')
     parser.add_argument('--num-res-filters', type=int, default=128,
                         help='Number of filters on the convolutional layers in the residual blocks')
+    parser.add_argument('--num-blocks', type=int, default=5,
+                        help='Number of repeated inner residual blocks (default=5)')
     # losses
     parser.add_argument('--content-w', dest='content_weight', type=float,
                         default=0.01, help='Content loss weight')
