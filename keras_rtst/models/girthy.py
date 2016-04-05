@@ -13,8 +13,11 @@ from keras.layers.normalization import BatchNormalization
 from keras.models import Graph, Sequential
 
 
-def add_conv_block(net, name, input_name, filters, filter_size, activation='relu', subsample=(1, 1)):
-    net.add_node(Convolution2D(filters, filter_size, filter_size, subsample=subsample, border_mode='same'),
+def add_conv_block(net, name, input_name, filters, filter_size, activation='relu',
+        subsample=(1, 1), init='glorot_uniform'):
+    net.add_node(
+        Convolution2D(filters, filter_size, filter_size,
+            subsample=subsample, border_mode='same', init=init),
         name + '_conv', input_name)
     net.add_node(BatchNormalization(mode=0, axis=1), name + '_bn',  name + '_conv')
     if isinstance(activation, six.string_types):
@@ -40,13 +43,13 @@ def create_res_texture_net(input_rows, input_cols, num_res_filters=128,
     last_name = 'in0'
     # scale down input to max depth with a series of strided convolutions
     for scale_i in range(depth):
-        num_scale_filters = num_res_filters // (2 ** (depth - scale_i - 1))
+        num_scale_filters = num_res_filters - scale_i * 8 # // (2 ** scale_i) # (depth - scale_i - 1))
         scale_name = 'down_{}'.format(scale_i)
         add_conv_block(net, scale_name, last_name, num_scale_filters, 3, subsample=(2, 2), activation=activation)
         last_name = scale_name
     # add a series of residual blocks at each scale, from smallest to largest
     for scale_i in reversed(range(depth)):
-        num_scale_filters = num_res_filters // (2 ** (depth - scale_i - 1))
+        num_scale_filters = num_res_filters - scale_i * 8 # // (2 ** scale_i) # (depth - scale_i - 1))
         last_scale_name = last_name
         for res_i in range(num_res_blocks):
             block_name = 'res_{}_{}'.format(scale_i, res_i)
