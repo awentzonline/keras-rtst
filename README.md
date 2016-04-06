@@ -23,7 +23,7 @@ Examples
 --------
 There's an examples folder. Example of an example:
 
-Make a brick texturizer: `./make-example-texturizer.sh bricks0 <path/to/training/images> <path/to/vgg16/weights.h5>`
+Make a brick texturizer: `./make-example-texturizer.sh bricks0 <path/to/training/images> <path/to/evaluation/images> <path/to/vgg16/weights.h5>`
 
 Differences from the paper
 --------------------------
