@@ -21,7 +21,7 @@ setup(
         'scikit-learn>=0.17.0',
         'six>=1.10.0',
         'Theano>=0.8.0rc1',
-        'keras-vgg-buddy>=0.0.4'
+        'keras-vgg-buddy>=0.0.5'
     ],
     dependency_links=[
         'https://github.com/Theano/Theano.git@954c3816a40de172c28124017a25387f3bf551b2#egg=Theano',
