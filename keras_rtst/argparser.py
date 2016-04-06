@@ -92,6 +92,6 @@ def get_args():
                         default=400, help='Number of training epochs')
     parser.add_argument('--model', dest='model', type=str,
                         default='transfer', help='Which model to use. Only supports "transfer"')
-    parser.add_argument('--save-model', dest='save_mode', action='store_true',
+    parser.add_argument('--save-model', dest='save_model', action='store_true',
                         help='Serialize the model as JSON')
     return parser.parse_args()

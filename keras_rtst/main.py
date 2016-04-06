@@ -50,8 +50,9 @@ def train_main(args):
         save_kwargs['overwrite'] = True
     model.nodes['texnet'].save_weights(weights_filename, **save_kwargs)
     model_json = model.nodes['texnet'].to_json()
-    with open(model_filename, 'w') as model_file:
-        model_file.write(model_json)
+    if args.save_model:
+        with open(model_filename, 'w') as model_file:
+            model_file.write(model_json)
     # output final samples
     output_samples(model, args, eval_generator)
 
