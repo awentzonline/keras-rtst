@@ -13,7 +13,7 @@ setup(
     install_requires=[
         'Cython>=0.23.4',
         'h5py>=2.5.0',
-        'Keras>=0.3.3',
+        'Keras==0.3.3',
         'numpy>=1.10.4',
         'Pillow>=3.1.1',
         'PyYAML>=3.11',
@@ -21,7 +21,7 @@ setup(
         'scikit-learn>=0.17.0',
         'six>=1.10.0',
         'Theano>=0.8.0rc1',
-        'keras-vgg-buddy>=0.0.5'
+        'keras-vgg-buddy==0.0.5'
     ],
     dependency_links=[
         'https://github.com/Theano/Theano.git@954c3816a40de172c28124017a25387f3bf551b2#egg=Theano',
